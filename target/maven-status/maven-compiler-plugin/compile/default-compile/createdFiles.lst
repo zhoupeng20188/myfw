@@ -1,0 +1,6 @@
+com\zp\fw\config\AspectConfig.class
+com\zp\fw\config\ZpWebMvcConfigurer.class
+com\zp\fw\annotation\MyParameter.class
+com\zp\fw\annotation\ZpApplication.class
+com\zp\fw\utils\ZpUtil.class
+com\zp\fw\inteceptor\ZpInteceptor.class
