@@ -1,10 +1,13 @@
 package com.zp.fw.config;
 
 import com.alibaba.fastjson.JSON;
+import com.zp.fw.annotation.MyParameter;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -12,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +28,7 @@ public class AspectConfig {
     // logPointCut()代表切点名称
 //    @Pointcut("@com.zp.fw.annotation(com.example.myfwtest.com.zp.fw.config.MyTest)")
     @Pointcut("@annotation(com.zp.fw.annotation.MyParameter)")
-    public void parameterPointCut(){
+    public void parameterPointCut() {
     }
 
 
@@ -70,8 +74,16 @@ public class AspectConfig {
         Object result = pjp.proceed();
         Long time = System.currentTimeMillis() - start;
 
-        //记录返回参数
-//        data.put("result", result);
+        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+        Method method1 = methodSignature.getMethod();
+        if (method1.isAnnotationPresent(MyParameter.class)) {
+            MyParameter myParameter = method1.getDeclaredAnnotation(MyParameter.class);
+            if (myParameter.includeResultData()) {
+                //记录返回参数
+                data.put("result", result);
+            }
+        }
+
 
         //设置消耗总时间
         data.put("consumeTime", time + "ms");

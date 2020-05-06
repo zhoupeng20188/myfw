@@ -1,3 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.zp.fw.config.AspectConfig,\
-  com.zp.fw.config.ZpWebMvcConfigurer
+  com.zp.fw.config.ZpWebMvcConfigurer,\
+  com.zp.fw.config.ZpInit,\
+  com.zp.fw.config.ZpApplicationParser
