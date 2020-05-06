@@ -67,20 +67,20 @@
                 <encoding>UTF-8</encoding>
             </configuration>
         </plugin>
-        <!--默认用maven打成jar后，jar包里的component都无法被扫描到，用eclipse里的ADD DIRECTORY ENTRIES打包可解决
-        对应maven里需要加上下面的插件-->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>2.4</version>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                    </manifest>
-                </archive>
-            </configuration>
-        </plugin>
+        <!--&lt;!&ndash;默认用maven打成jar后，jar包里的component都无法被扫描到，用eclipse里的ADD DIRECTORY ENTRIES打包可解决-->
+        <!--对应maven里需要加上下面的插件&ndash;&gt;-->
+        <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-jar-plugin</artifactId>-->
+            <!--<version>2.4</version>-->
+            <!--<configuration>-->
+                <!--<archive>-->
+                    <!--<manifest>-->
+                        <!--<addDefaultImplementationEntries>true</addDefaultImplementationEntries>-->
+                    <!--</manifest>-->
+                <!--</archive>-->
+            <!--</configuration>-->
+        <!--</plugin>-->
     </plugins>
 </build>
 </project>
