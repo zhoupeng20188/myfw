@@ -2,6 +2,7 @@ package com.zp.fw.config;
 
 import com.alibaba.fastjson.JSON;
 import com.zp.fw.annotation.MyParameter;
+import com.zp.fw.bean.ZpClient;
 import com.zp.fw.properties.LogProperty;
 import com.zp.fw.properties.RegistryProperty;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -29,6 +30,8 @@ public class AspectConfig {
     RegistryProperty registryProperty;
     @Autowired
     LogProperty logProperty;
+    @Autowired
+    ZpClient zpClient;
 
     // 2. PointCut表示这是一个切点，@annotation表示这个切点切到一个注解上，后面带该注解的全类名
     // 切面最主要的就是切点，所有的故事都围绕切点发生
@@ -48,6 +51,7 @@ public class AspectConfig {
          */
         if (logProperty.isEnable()) {
             System.out.println(registryProperty.getIp() + "," + registryProperty.getName());
+            zpClient.addClient(registryProperty.getIp(), registryProperty.getName());
             RequestAttributes ra = RequestContextHolder.getRequestAttributes();
             ServletRequestAttributes sra = (ServletRequestAttributes) ra;
             HttpServletRequest request = sra.getRequest();
@@ -58,12 +62,18 @@ public class AspectConfig {
             //获取目标类方法名称
             String methodName = pjp.getSignature().getName();
 
+            String remoteAddr = request.getRemoteAddr();
+            int remotePort = request.getRemotePort();
+            //记录访问ip和端口
+            data.put("ip",remoteAddr + ":"+remotePort);
+
             //记录类名称
             data.put("clazzName", clazzName);
             //记录对应方法名称
             data.put("methodName", methodName);
 
             String method = request.getMethod();
+            data.put("methodType", method);
             String queryString = request.getQueryString();
             String params = "";
             Object[] args = pjp.getArgs();

@@ -4,4 +4,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.zp.fw.config.ZpInit,\
   com.zp.fw.config.ZpApplicationParser,\
   com.zp.fw.properties.RegistryProperty,\
-  com.zp.fw.properties.LogProperty
+  com.zp.fw.properties.LogProperty,\
+  com.zp.fw.bean.ZpClient,\
+  com.zp.fw.utils.SpringUtil

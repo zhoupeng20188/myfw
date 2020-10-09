@@ -24,6 +24,30 @@
             <artifactId>spring-aop</artifactId>
             <version>5.2.5.RELEASE</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.19</version>
+        </dependency>
+
+        <!-- epub解析 -->
+        <dependency>
+            <groupId>nl.siegmann.epublib</groupId>
+            <artifactId>epublib-core</artifactId>
+            <version>3.1</version>
+        </dependency>
+
+        <!-- HTML解析  START -->
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+        <!-- HTML解析   END  -->
+
         <!--<dependency>-->
             <!--<groupId>org.aspectj</groupId>-->
             <!--<artifactId>aspectjrt</artifactId>-->
@@ -42,6 +66,31 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+    <!--设置maven仓库 nexus-->
+    <repositories>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://120.55.93.23:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus-releases</id>
+            <url>http://120.55.93.23:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
     <dependencyManagement>
         <dependencies>
             <!-- Spring Boot 2 requires Java 8, so we need to manually stick to 1.5.x version in order to compile apollo-client against Java 7 -->
